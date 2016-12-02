@@ -18,7 +18,7 @@ function [ trace, rss ] = get_online_data( fingerprint, gridSize, roomLength, ro
             y = size(fingerprint, 2);
         end
         rss(i, :) = fingerprint(x, y, :);
-        trace(i, :) = [x * gridSize, y * gridSize];
+        trace(i, :) = [x, y];
     end
 end
 

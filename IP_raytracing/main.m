@@ -13,9 +13,11 @@ load radio_map_20_15.mat;
 %注意：这里的仿真环境（fingerprint）是一个精度很高的指纹库，后面从这个仿真环境中进行取样（采集数据）并生成用于定位的指纹库。
 
 %% 获取离线指纹库
-%直接采样，如果要研究指纹库构建上的优化，在这部分改进
-fp = get_offline_data(fingerprint);
-save('offline_data_fp', 'fp');
+%如果要研究指纹库构建上的优化，在这部分改进
+[offline_rss, offline_location] = get_offline_data_uniform(fingerprint); %均匀采样
+% [offline_rss, offline_location] = get_offline_data_random(fingerprint, data_num); %随机采样
+save('offline_data_rss', 'offline_rss');
+save('offline_data_location', 'offline_location');
 
 %% 获取在线定位阶段的数据5
 %前面默认的数据集的密度是0.01m，这样的话整个仿真系统的位置最小分辨率为0.01m，trace总是0.01的整数倍
