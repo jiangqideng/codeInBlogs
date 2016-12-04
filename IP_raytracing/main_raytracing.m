@@ -15,9 +15,9 @@ load radio_map_20_15.mat;
 %% 获取离线指纹库
 %如果要研究指纹库构建上的优化，在这部分改进
 [offline_rss, offline_location] = get_offline_data_uniform(fingerprint); %均匀采样
-% [offline_rss, offline_location] = get_offline_data_random(fingerprint, data_num); %随机采样
-save('offline_data_rss', 'offline_rss');
-save('offline_data_location', 'offline_location');
+save('offline_data_uniform', 'offline_rss', 'offline_location');
+[offline_rss, offline_location] = get_offline_data_random(fingerprint); %随机采样
+save('offline_data_random', 'offline_rss', 'offline_location');
 
 %% 获取在线定位阶段的数据5
 %前面默认的数据集的密度是0.01m，这样的话整个仿真系统的位置最小分辨率为0.01m，trace总是0.01的整数倍
@@ -25,7 +25,6 @@ roomLength = 20;
 roomWidth = 15;
 t = 10000;
 [ trace, rss ] = get_online_data( fingerprint, 0.01, roomLength, roomWidth, t ); %得到轨迹与对应的RSS
-save('online_data_trace', 'trace');
-save('online_data_rss', 'rss');
+save('online_data', 'trace', 'rss');
 %%
 clear fingerprint;
